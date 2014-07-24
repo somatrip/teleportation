@@ -18,7 +18,7 @@ public class ballTrigger : MonoBehaviour {
 
 	}
 
-    void OnTriggerEnter(Collider thing)
+    void OnCollisionEnter2D(Collision2D thing)
     {
         //the direction with which to push slightly. original direction rotated 45 degrees left or right
         center = Quaternion.Euler(0f, 0f, 45f) * rigidbody2D.velocity.normalized * forcePush;
@@ -29,7 +29,6 @@ public class ballTrigger : MonoBehaviour {
             //destroy player
             if (thing.gameObject.tag == "Player")
             {
-                Debug.Log("tango down");
                 Destroy(thing.gameObject);
                 //have some camera shake or camera zoom and text saying who wins here
             }
@@ -37,7 +36,6 @@ public class ballTrigger : MonoBehaviour {
             //bounce a different direction
             else
             {
-                Debug.Log("false alarm");
                 //add a slight force either left or right
                 if (isLeft)
                 {
