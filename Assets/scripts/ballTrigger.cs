@@ -7,10 +7,14 @@ public class ballTrigger : MonoBehaviour {
     public float forcePush = 5; //to be used for the "slight push" when bouncing off other objects. 
     bool isLeft;
 
+    //for game ending purposes
+    public cameraControl camControl;
+    public GameObject camController;
+
 	// Use this for initialization
 	void Start () {
         isLeft = true;
- 
+        camControl = camController.GetComponent<cameraControl>();
 	}
 	
 	// Update is called once per frame
@@ -18,7 +22,7 @@ public class ballTrigger : MonoBehaviour {
 
 	}
 
-    void OnCollisionEnter2D(Collision2D thing)
+    void OnTriggerEnter2D(Collider2D thing)
     {
         //the direction with which to push slightly. original direction rotated 45 degrees left or right
         center = Quaternion.Euler(0f, 0f, 45f) * rigidbody2D.velocity.normalized * forcePush;
@@ -27,9 +31,11 @@ public class ballTrigger : MonoBehaviour {
        // if (thing.gameObject.tag != "Ball")
         {
             //destroy player
-            if (thing.gameObject.tag == "Player")
+            if (thing.gameObject.tag == "1player" || thing.gameObject.tag == "2player")
             {
-                Destroy(thing.gameObject);
+                Time.timeScale = 0;
+                camControl.cameraSwap(thing);
+                //Destroy(thing.gameObject);
                 //have some camera shake or camera zoom and text saying who wins here
             }
 
@@ -37,22 +43,16 @@ public class ballTrigger : MonoBehaviour {
             else
             {
                 //add a slight force either left or right
-                if (isLeft)
-                {
-                    forcePush *= -1;
-                    isLeft = false;
-                }
-
-                else
-                {
-                    forcePush *= -1;
-                    isLeft = true;
-                }
+                forcePush *= -1;
+                isLeft = !isLeft;
 
                 rigidbody2D.AddForce(center, ForceMode2D.Impulse);
             }
         }
-            
+    }
 
+    IEnumerator pause()
+    {
+        yield return new WaitForSeconds(1);
     }
 }
