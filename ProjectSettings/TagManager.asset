@@ -6,6 +6,7 @@ TagManager:
   - Ball
   - 1player
   - 2player
+  - dead
   - 
   Builtin Layer 0: Default
   Builtin Layer 1: TransparentFX

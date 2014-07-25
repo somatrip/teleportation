@@ -9,6 +9,9 @@ public class playMove : MonoBehaviour
 
     Vector2 movement;
 
+    //for screenshake purposes
+    public screenShake shaker;
+
     // Use this for initialization
     void Start()
     {
@@ -34,10 +37,19 @@ public class playMove : MonoBehaviour
         //teleport and spawn dead body if 0 is pressed on numpad
         if (Input.GetKeyDown(KeyCode.RightShift))
         {
-            //rigidbody2D.velocity += movement.normalized * power;
-            //Debug.Log("Power!");
             Instantiate(deadplayer1, transform.position, Quaternion.identity);
             rigidbody2D.AddForce(movement.normalized * power, ForceMode2D.Impulse);           
+        }
+    }
+
+    //if the collider hits anything besides the ball, shake the screen.
+    void OnTriggerEnter2D(Collider2D col)
+    {
+        //play a sound effect 
+
+        if (col.gameObject.tag != "Ball")
+        {
+            shaker.shakeTimer += .1f;
         }
     }
 }

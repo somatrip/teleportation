@@ -31,7 +31,6 @@ public class cameraControl : MonoBehaviour {
             mainCam.enabled = false;
             cam2.enabled = true;
         }
-        //pause the game
         //pause the music
         //enable GUI words showing victory
     }

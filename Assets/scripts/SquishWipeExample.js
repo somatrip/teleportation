@@ -6,21 +6,22 @@ private var inProgress = false;
 private var swap = false;
 
 function Update () {
-    if (Input.GetKeyDown("up")) {
-        DoWipe(TransitionType.Up);
+    if (Input.GetKeyDown(KeyCode.UpArrow)) {
+        StartCoroutine(DoWipe(TransitionType.Up));
     }
-    else if (Input.GetKeyDown("down")) {
-        DoWipe(TransitionType.Down);
+    else if (Input.GetKeyDown(KeyCode.DownArrow)) {
+        StartCoroutine(DoWipe(TransitionType.Down));
     }
-    else if (Input.GetKeyDown("left")) {
-        DoWipe(TransitionType.Left);
-    }
-    else if (Input.GetKeyDown("right")) {
-        DoWipe(TransitionType.Right);
+    else if (Input.GetKeyDown(KeyCode.LeftArrow)) {
+        StartCoroutine(DoWipe(TransitionType.Left));
+    } 
+    else if (Input.GetKeyDown(KeyCode.RightArrow)) {
+        StartCoroutine(DoWipe(TransitionType.Right));
     }
 }
 
 function DoWipe (transitionType : TransitionType) {
+	Debug.Log("this is working");
     if (inProgress) return;
     inProgress = true;
    

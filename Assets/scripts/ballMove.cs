@@ -34,7 +34,7 @@ public class ballMove : MonoBehaviour
     //spawn a ball, but wait one second before it shows up.
     IEnumerator SpawnBall()
     {
-        yield return new WaitForSeconds(30);
+        yield return new WaitForSeconds(20);
 
         //spawn twenty balls and push them with some force on spawn
         for (int i = 0; i < limit; i++)
